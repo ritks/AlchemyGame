@@ -1,10 +1,12 @@
 extends StaticBody2D
 
 enum State { EMPTY, COOKING, READY, SPOILED }
+enum Station { CAULDRON, MORTAR, PAN }
 
 @export var cook_time_sec: float = 8.0
 @export var spoil_time_sec: float = 6.0
 @export var max_ingredients: int = 1
+@export var cook_station_type: Station = Station.CAULDRON
 
 var current_ingredients: int = 0
 var ingredients_used: Array[Ingredient.Type] = []
@@ -19,7 +21,7 @@ const BAR_WIDTH := 80.0
 const FEEDBACK_DURATION := 1.5
 
 var state: State = State.EMPTY
-var cooking_item_type: Ingredient.Type = Ingredient.Type.TRIANGLE
+var cooking_item_type: Ingredient.Type = Ingredient.Type.YELLOW
 var showing_feedback: bool = false
 
 @onready var body: Polygon2D = $Body
@@ -79,6 +81,29 @@ func interact(player: Node) -> void:
 				if current_ingredients == max_ingredients:
 					_set_state(State.COOKING)
 					cook_timer.start()
+					if cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.YELLOW:
+						cooking_item_type = Ingredient.Type.COOK_YELLOW
+					elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.ORANGE:
+						cooking_item_type = Ingredient.Type.COOK_ORANGE
+					elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.BLUE:
+						cooking_item_type = Ingredient.Type.COOK_BLUE
+					elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.YELLOW:
+						cooking_item_type = Ingredient.Type.GRIND_YELLOW
+					elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.ORANGE:
+						cooking_item_type = Ingredient.Type.GRIND_ORANGE
+					elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.BLUE:
+						cooking_item_type = Ingredient.Type.GRIND_BLUE
+					elif cook_station_type == Station.CAULDRON and Ingredient.Type.GRIND_YELLOW in ingredients_used and Ingredient.Type.COOK_ORANGE in ingredients_used:
+						cooking_item_type = Ingredient.Type.SUN_TEA
+					elif cook_station_type == Station.CAULDRON and Ingredient.Type.GRIND_BLUE in ingredients_used and Ingredient.Type.COOK_BLUE in ingredients_used:
+						cooking_item_type = Ingredient.Type.MINT_SODA
+					elif cook_station_type == Station.CAULDRON and Ingredient.Type.GRIND_ORANGE in ingredients_used and Ingredient.Type.GRIND_ORANGE in ingredients_used:
+						cooking_item_type = Ingredient.Type.EARTH_BREW
+					elif cook_station_type == Station.CAULDRON and Ingredient.Type.EARTH_BREW in ingredients_used and Ingredient.Type.COOK_BLUE in ingredients_used:
+						cooking_item_type = Ingredient.Type.SUS_CONCOC
+					else:
+						cooking_item_type = Ingredient.Type.TRASH
+					print(cooking_item_type)
 					current_ingredients = 0
 					ingredients_used = []
 		State.COOKING:

@@ -64,46 +64,50 @@ metadata/_edit_group_ = true
 position = Vector2(935.9999, 581)
 max_ingredients = 2
 
-[node name="CookingStation" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
+[node name="Pan1" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
 position = Vector2(126.000015, 430.00006)
+cook_station_type = 2
 
-[node name="CollisionShape2D" parent="Floor/CookingStation" index="0" unique_id=1305692116]
+[node name="CollisionShape2D" parent="Floor/Pan1" index="0" unique_id=1305692116]
 shape = SubResource("CircleShape2D_body")
 
-[node name="CollisionShape2D" parent="Floor/CookingStation/InteractArea" parent_id_path=PackedInt32Array(1430987799, 1775379100) index="0" unique_id=66873291]
+[node name="CollisionShape2D" parent="Floor/Pan1/InteractArea" parent_id_path=PackedInt32Array(1430987799, 1775379100) index="0" unique_id=66873291]
 position = Vector2(33.217987, -0.69205785)
 scale = Vector2(1.0860245, -0.5886187)
 shape = SubResource("CircleShape2D_interact")
 
-[node name="CookingStation2" parent="Floor" unique_id=1899951254 instance=ExtResource("2_station")]
+[node name="Pan2" parent="Floor" unique_id=1899951254 instance=ExtResource("2_station")]
 position = Vector2(113.99999, 619)
+cook_station_type = 2
 
-[node name="CollisionShape2D" parent="Floor/CookingStation2" index="0" unique_id=1305692116]
+[node name="CollisionShape2D" parent="Floor/Pan2" index="0" unique_id=1305692116]
 shape = SubResource("CircleShape2D_body")
 
-[node name="CollisionShape2D" parent="Floor/CookingStation2/InteractArea" parent_id_path=PackedInt32Array(1899951254, 1775379100) index="0" unique_id=66873291]
+[node name="CollisionShape2D" parent="Floor/Pan2/InteractArea" parent_id_path=PackedInt32Array(1899951254, 1775379100) index="0" unique_id=66873291]
 position = Vector2(33.217987, -0.69205785)
 scale = Vector2(1.0860245, -0.5886187)
 shape = SubResource("CircleShape2D_interact")
 
-[node name="CookingStation3" parent="Floor" unique_id=609255009 instance=ExtResource("2_station")]
+[node name="Mortar1" parent="Floor" unique_id=609255009 instance=ExtResource("2_station")]
 position = Vector2(1777.0002, 234.99994)
+cook_station_type = 1
 
-[node name="CollisionShape2D" parent="Floor/CookingStation3" index="0" unique_id=1305692116]
+[node name="CollisionShape2D" parent="Floor/Mortar1" index="0" unique_id=1305692116]
 shape = SubResource("CircleShape2D_body")
 
-[node name="CollisionShape2D" parent="Floor/CookingStation3/InteractArea" parent_id_path=PackedInt32Array(609255009, 1775379100) index="0" unique_id=66873291]
+[node name="CollisionShape2D" parent="Floor/Mortar1/InteractArea" parent_id_path=PackedInt32Array(609255009, 1775379100) index="0" unique_id=66873291]
 position = Vector2(-32.180016, -0.6920209)
 scale = Vector2(1.0860245, -0.5886187)
 shape = SubResource("CircleShape2D_interact")
 
-[node name="CookingStation4" parent="Floor" unique_id=236315879 instance=ExtResource("2_station")]
+[node name="Mortar2" parent="Floor" unique_id=236315879 instance=ExtResource("2_station")]
 position = Vector2(1787.9999, 406)
+cook_station_type = 1
 
-[node name="CollisionShape2D" parent="Floor/CookingStation4" index="0" unique_id=1305692116]
+[node name="CollisionShape2D" parent="Floor/Mortar2" index="0" unique_id=1305692116]
 shape = SubResource("CircleShape2D_body")
 
-[node name="CollisionShape2D" parent="Floor/CookingStation4/InteractArea" parent_id_path=PackedInt32Array(236315879, 1775379100) index="0" unique_id=66873291]
+[node name="CollisionShape2D" parent="Floor/Mortar2/InteractArea" parent_id_path=PackedInt32Array(236315879, 1775379100) index="0" unique_id=66873291]
 position = Vector2(-28.373663, -2.4221458)
 scale = Vector2(1.0860245, -0.5886187)
 shape = SubResource("CircleShape2D_interact")
@@ -124,7 +128,7 @@ position = Vector2(700, 540)
 scale = Vector2(1, 1)
 
 [editable path="Floor/Cauldron"]
-[editable path="Floor/CookingStation"]
-[editable path="Floor/CookingStation2"]
-[editable path="Floor/CookingStation3"]
-[editable path="Floor/CookingStation4"]
+[editable path="Floor/Pan1"]
+[editable path="Floor/Pan2"]
+[editable path="Floor/Mortar1"]
+[editable path="Floor/Mortar2"]

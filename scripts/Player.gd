@@ -7,7 +7,7 @@ const FACING_INDICATOR_OFFSET := 30.0
 var facing_dir: Vector2 = Vector2.DOWN
 
 var is_holding: bool = false
-var held_item_type: Ingredient.Type = Ingredient.Type.TRIANGLE
+var held_item_type: Ingredient.Type = Ingredient.Type.YELLOW
 var held_item_cooked: bool = false
 
 @onready var interact_area: Area2D = $InteractArea
@@ -65,5 +65,5 @@ func _update_held_item_visual() -> void:
 	held_item_visual.visible = is_holding
 	if is_holding:
 		held_item_visual.polygon = Ingredient.polygon_points(held_item_type, 16.0)
-		var base_color: Color = Ingredient.COLORS[held_item_type]
+		var base_color: Color = Ingredient.COLORS[0]
 		held_item_visual.color = base_color.lightened(0.4) if held_item_cooked else base_color
