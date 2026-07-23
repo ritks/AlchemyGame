@@ -29,7 +29,11 @@ func _physics_process(_delta: float) -> void:
 	_update_facing_transforms()
 
 	if Input.is_action_just_pressed("interact"):
-		print("interact pressed | facing=%s | overlaps=%s" % [facing_dir, interact_area.get_overlapping_areas()])
+		for area in interact_area.get_overlapping_areas():
+			var target: Node = area.owner
+			if target and target.has_method("interact"):
+				target.interact()
+				break
 
 
 func _update_facing_transforms() -> void:

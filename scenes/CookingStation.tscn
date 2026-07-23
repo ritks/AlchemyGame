@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/CookingStation.gd" id="1_station"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 64.0
+
+[node name="CookingStation" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_station")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_body")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.55, 0.55, 0.55, 1)
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="CookTimer" type="Timer" parent="."]
+
+[node name="SpoilTimer" type="Timer" parent="."]
+
+[node name="TimerDisplay" type="Node2D" parent="."]
+position = Vector2(0, -70)
+visible = false
+
+[node name="BarBackground" type="ColorRect" parent="TimerDisplay"]
+position = Vector2(-40, -5)
+size = Vector2(80, 10)
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="BarFill" type="ColorRect" parent="TimerDisplay"]
+position = Vector2(-40, -5)
+size = Vector2(80, 10)
+color = Color(0.9, 0.6, 0.1, 1)
+
+[node name="TimeLabel" type="Label" parent="TimerDisplay"]
+position = Vector2(-40, -26)
+size = Vector2(80, 20)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+text = "0.00"

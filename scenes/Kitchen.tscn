@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/CookingStation.tscn" id="2_station"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_counter"]
 size = Vector2(24, 1080)
@@ -69,6 +70,15 @@ position = Vector2(1104, 1096)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/Boundaries/WallBottom"]
 shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Cauldron1" parent="Floor" instance=ExtResource("2_station")]
+position = Vector2(960, 420)
+
+[node name="Cauldron2" parent="Floor" instance=ExtResource("2_station")]
+position = Vector2(1248, 420)
+
+[node name="Cauldron3" parent="Floor" instance=ExtResource("2_station")]
+position = Vector2(1104, 660)
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(700, 540)
