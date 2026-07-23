@@ -35,6 +35,8 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="SpoilTimer" type="Timer" parent="." unique_id=1560959580]
 
+[node name="FeedbackTimer" type="Timer" parent="."]
+
 [node name="TimerDisplay" type="Node2D" parent="." unique_id=1564197161]
 visible = false
 position = Vector2(0, -70)
