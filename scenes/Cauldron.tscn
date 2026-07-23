@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://brytf4vrdb1mp"]
+[gd_scene format=3 uid="uid://bl1c1sadi8yyt"]
 
-[ext_resource type="Script" uid="uid://cplqpjt0h04w7" path="res://scripts/CookingStation.gd" id="1_station"]
+[ext_resource type="Script" uid="uid://cplqpjt0h04w7" path="res://scripts/CookingStation.gd" id="1_t6bb6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 40.0
@@ -11,7 +11,7 @@ radius = 53.334118
 [node name="CookingStation" type="StaticBody2D" unique_id=1430987799]
 scale = Vector2(1.7, 1.7)
 collision_mask = 0
-script = ExtResource("1_station")
+script = ExtResource("1_t6bb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305692116]
 scale = Vector2(1.7, 1.7)

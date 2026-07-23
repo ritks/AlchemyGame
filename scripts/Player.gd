@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 300.0
+const SPEED := 1000.0
 const INTERACT_OFFSET := 48.0
 const FACING_INDICATOR_OFFSET := 30.0
 
