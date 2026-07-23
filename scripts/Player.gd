@@ -82,3 +82,13 @@ func _update_held_item_visual() -> void:
 			held_item_visual.texture = load("res://sprites/grind_orange.png")
 		elif held_item_type == Ingredient.Type.GRIND_BLUE:
 			held_item_visual.texture = load("res://sprites/grind_blue.png")
+		elif held_item_type == Ingredient.Type.SUN_TEA:
+			held_item_visual.texture = load("res://sprites/sun_tea.png")
+		elif held_item_type == Ingredient.Type.MINT_SODA:
+			held_item_visual.texture = load("res://sprites/mint_soda.png")
+		elif held_item_type == Ingredient.Type.EARTH_BREW:
+			held_item_visual.texture = load("res://sprites/earth_brew.png")
+		elif held_item_type == Ingredient.Type.SUS_CONCOC:
+			held_item_visual.texture = load("res://sprites/sus_concoc.png")
+		else:
+			held_item_visual.texture = load("res://sprites/trash.png")

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b72wyqdkujstb"]
+
+[ext_resource type="Script" uid="uid://croe207iuxd74" path="res://scripts/Customer.gd" id="1_xvjni"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bonrk"]
+radius = 53.334118
+
+[node name="Customer" type="Node2D" unique_id=1041682983]
+script = ExtResource("1_xvjni")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=901823359]
+
+[node name="Textbubble" type="Node2D" parent="." unique_id=846460195]
+
+[node name="Sprite" type="Sprite2D" parent="Textbubble" unique_id=1164970831]
+
+[node name="Drink" type="Sprite2D" parent="Textbubble" unique_id=1313583334]
+
+[node name="InteractArea" type="Area2D" parent="Textbubble" unique_id=2102245791]
+scale = Vector2(1.7, 1.7)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Textbubble/InteractArea" unique_id=389125338]
+scale = Vector2(1.0412896, 1.8462214)
+shape = SubResource("CircleShape2D_bonrk")

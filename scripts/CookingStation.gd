@@ -166,9 +166,9 @@ func _set_state(new_state: State) -> void:
 		feedback_timer.stop()
 		bar_background.visible = true
 		bar_fill.visible = true
-	# state = new_state
-	# match state:
-	# 	State.EMPTY: body.color = COLOR_EMPTY
-	# 	State.COOKING: body.color = COLOR_COOKING
-	# 	State.READY: body.color = COLOR_READY
-	# 	State.SPOILED: body.color = COLOR_SPOILED
+	state = new_state
+	match state:
+		State.EMPTY: body.modulate = Color.WHITE
+		State.COOKING: body.modulate = Color.WHITE
+		State.READY: body.modulate = Color.WHITE
+		State.SPOILED: body.modulate = Color.WHITE
