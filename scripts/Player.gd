@@ -12,7 +12,7 @@ var held_item_cooked: bool = false
 
 @onready var interact_area: Area2D = $InteractArea
 @onready var facing_indicator: Node2D = $FacingIndicator
-@onready var held_item_visual: Polygon2D = $HeldItemVisual
+@onready var held_item_visual: Sprite2D = $HeldItemVisual
 
 
 func _ready() -> void:
@@ -64,6 +64,21 @@ func clear_held_item() -> void:
 func _update_held_item_visual() -> void:
 	held_item_visual.visible = is_holding
 	if is_holding:
-		held_item_visual.polygon = Ingredient.polygon_points(held_item_type, 16.0)
-		var base_color: Color = Ingredient.COLORS[0]
-		held_item_visual.color = base_color.lightened(0.4) if held_item_cooked else base_color
+		if held_item_type == Ingredient.Type.YELLOW:
+			held_item_visual.texture = load("res://sprites/yellow.png")
+		elif held_item_type == Ingredient.Type.ORANGE:
+			held_item_visual.texture = load("res://sprites/orange.png")
+		elif held_item_type == Ingredient.Type.BLUE:
+			held_item_visual.texture = load("res://sprites/blue.png")
+		elif held_item_type == Ingredient.Type.COOK_YELLOW:
+			held_item_visual.texture = load("res://sprites/cook_yellow.png")
+		elif held_item_type == Ingredient.Type.COOK_ORANGE:
+			held_item_visual.texture = load("res://sprites/cook_orange.png")
+		elif held_item_type == Ingredient.Type.COOK_BLUE:
+			held_item_visual.texture = load("res://sprites/cook_blue.png")
+		elif held_item_type == Ingredient.Type.GRIND_YELLOW:
+			held_item_visual.texture = load("res://sprites/grind_yellow.png")
+		elif held_item_type == Ingredient.Type.GRIND_ORANGE:
+			held_item_visual.texture = load("res://sprites/grind_orange.png")
+		elif held_item_type == Ingredient.Type.GRIND_BLUE:
+			held_item_visual.texture = load("res://sprites/grind_blue.png")

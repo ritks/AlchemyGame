@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4xdi3y57hj5q"]
 
 [ext_resource type="Script" uid="uid://6g8lgm28suyi" path="res://scripts/Player.gd" id="1_player"]
-[ext_resource type="Texture2D" uid="uid://b208jnl8rdrs1" path="res://player.png" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://b208jnl8rdrs1" path="res://sprites/player.png" id="2_v6fml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(48, 48)
@@ -31,7 +31,7 @@ polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 color = Color(1, 0.9, 0.2, 1)
 polygon = PackedVector2Array(0, -10, 20, 0, 0, 10)
 
-[node name="HeldItemVisual" type="Polygon2D" parent="." unique_id=1922305319]
+[node name="HeldItemVisual" type="Sprite2D" parent="." unique_id=1900718523]
 visible = false
 position = Vector2(0, -40)
 

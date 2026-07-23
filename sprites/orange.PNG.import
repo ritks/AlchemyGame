@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1vpi8df6jix5"
-path="res://.godot/imported/kitchen.png-f77adb2989db9031a8d024fe8f66ffb7.ctex"
+uid="uid://xs1q055qwikc"
+path="res://.godot/imported/orange.PNG-758e4c9db8e7acb1baedd5e29b3c21e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kitchen.png"
-dest_files=["res://.godot/imported/kitchen.png-f77adb2989db9031a8d024fe8f66ffb7.ctex"]
+source_file="res://sprites/orange.PNG"
+dest_files=["res://.godot/imported/orange.PNG-758e4c9db8e7acb1baedd5e29b3c21e9.ctex"]
 
 [params]
 

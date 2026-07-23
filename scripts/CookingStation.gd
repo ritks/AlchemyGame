@@ -24,7 +24,7 @@ var state: State = State.EMPTY
 var cooking_item_type: Ingredient.Type = Ingredient.Type.YELLOW
 var showing_feedback: bool = false
 
-@onready var body: Polygon2D = $Body
+@onready var body: Sprite2D = $Body
 @onready var cook_timer: Timer = $CookTimer
 @onready var spoil_timer: Timer = $SpoilTimer
 @onready var feedback_timer: Timer = $FeedbackTimer
@@ -35,7 +35,13 @@ var showing_feedback: bool = false
 
 
 func _ready() -> void:
-	body.polygon = _circle_points(36.0)
+	if cook_station_type == Station.CAULDRON:
+		pass
+	if cook_station_type == Station.PAN:
+		body.texture = load("res://sprites/pan.png")
+	if cook_station_type == Station.MORTAR:
+		body.texture = load("res://sprites/mortar.png")
+		
 	cook_timer.one_shot = true
 	cook_timer.wait_time = cook_time_sec
 	spoil_timer.one_shot = true
@@ -160,17 +166,9 @@ func _set_state(new_state: State) -> void:
 		feedback_timer.stop()
 		bar_background.visible = true
 		bar_fill.visible = true
-	state = new_state
-	match state:
-		State.EMPTY: body.color = COLOR_EMPTY
-		State.COOKING: body.color = COLOR_COOKING
-		State.READY: body.color = COLOR_READY
-		State.SPOILED: body.color = COLOR_SPOILED
-
-
-func _circle_points(radius: float, segments: int = 24) -> PackedVector2Array:
-	var pts := PackedVector2Array()
-	for i in segments:
-		var angle := TAU * i / segments
-		pts.append(Vector2(cos(angle), sin(angle)) * radius)
-	return pts
+	# state = new_state
+	# match state:
+	# 	State.EMPTY: body.color = COLOR_EMPTY
+	# 	State.COOKING: body.color = COLOR_COOKING
+	# 	State.READY: body.color = COLOR_READY
+	# 	State.SPOILED: body.color = COLOR_SPOILED

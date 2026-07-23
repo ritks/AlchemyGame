@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://j5e5mtm2yhph"]
 
-[ext_resource type="Texture2D" uid="uid://b1vpi8df6jix5" path="res://kitchen.png" id="1_6022o"]
+[ext_resource type="Texture2D" uid="uid://b1vpi8df6jix5" path="res://sprites/kitchen.png" id="1_6022o"]
 [ext_resource type="PackedScene" uid="uid://c4xdi3y57hj5q" path="res://scenes/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://brytf4vrdb1mp" path="res://scenes/CookingStation.tscn" id="2_station"]
 [ext_resource type="PackedScene" uid="uid://cbe3w5ohg047c" path="res://scenes/IngredientSlot.tscn" id="3_slot"]
@@ -66,6 +66,7 @@ max_ingredients = 2
 
 [node name="Pan1" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
 position = Vector2(126.000015, 430.00006)
+scale = Vector2(1, 1)
 cook_station_type = 2
 
 [node name="CollisionShape2D" parent="Floor/Pan1" index="0" unique_id=1305692116]
@@ -78,6 +79,7 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Pan2" parent="Floor" unique_id=1899951254 instance=ExtResource("2_station")]
 position = Vector2(113.99999, 619)
+scale = Vector2(1, 1)
 cook_station_type = 2
 
 [node name="CollisionShape2D" parent="Floor/Pan2" index="0" unique_id=1305692116]
@@ -90,6 +92,7 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Mortar1" parent="Floor" unique_id=609255009 instance=ExtResource("2_station")]
 position = Vector2(1777.0002, 234.99994)
+scale = Vector2(1, 1)
 cook_station_type = 1
 
 [node name="CollisionShape2D" parent="Floor/Mortar1" index="0" unique_id=1305692116]
@@ -102,6 +105,7 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Mortar2" parent="Floor" unique_id=236315879 instance=ExtResource("2_station")]
 position = Vector2(1787.9999, 406)
+scale = Vector2(1, 1)
 cook_station_type = 1
 
 [node name="CollisionShape2D" parent="Floor/Mortar2" index="0" unique_id=1305692116]

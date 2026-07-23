@@ -17,9 +17,7 @@ script = ExtResource("1_station")
 scale = Vector2(1.7, 1.7)
 shape = SubResource("CircleShape2D_body")
 
-[node name="Body" type="Polygon2D" parent="." unique_id=1187606581]
-scale = Vector2(1.7, 1.7)
-color = Color(0.55, 0.55, 0.55, 1)
+[node name="Body" type="Sprite2D" parent="." unique_id=1642447937]
 
 [node name="InteractArea" type="Area2D" parent="." unique_id=1775379100]
 scale = Vector2(1.7, 1.7)
@@ -35,7 +33,7 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="SpoilTimer" type="Timer" parent="." unique_id=1560959580]
 
-[node name="FeedbackTimer" type="Timer" parent="."]
+[node name="FeedbackTimer" type="Timer" parent="." unique_id=332214456]
 
 [node name="TimerDisplay" type="Node2D" parent="." unique_id=1564197161]
 visible = false
