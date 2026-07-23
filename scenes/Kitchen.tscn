@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_counter"]
+size = Vector2(24, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(1696, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(32, 1144)
+
+[node name="Kitchen" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+current = true
+
+[node name="CustomerArea" type="Node2D" parent="."]
+
+[node name="BackgroundRect" type="ColorRect" parent="CustomerArea"]
+position = Vector2(0, 0)
+size = Vector2(288, 1080)
+color = Color(0.85, 0.75, 0.55, 1)
+
+[node name="Counter" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+position = Vector2(288, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Counter"]
+shape = SubResource("RectangleShape2D_counter")
+
+[node name="Visual" type="ColorRect" parent="Counter"]
+position = Vector2(-12, -540)
+size = Vector2(24, 1080)
+color = Color(0.35, 0.22, 0.12, 1)
+
+[node name="Floor" type="Node2D" parent="."]
+
+[node name="BackgroundRect" type="ColorRect" parent="Floor"]
+position = Vector2(288, 0)
+size = Vector2(1632, 1080)
+color = Color(0.78, 0.78, 0.78, 1)
+
+[node name="Boundaries" type="Node2D" parent="Floor"]
+
+[node name="WallTop" type="StaticBody2D" parent="Floor/Boundaries"]
+collision_layer = 1
+collision_mask = 0
+position = Vector2(1104, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/Boundaries/WallTop"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WallRight" type="StaticBody2D" parent="Floor/Boundaries"]
+collision_layer = 1
+collision_mask = 0
+position = Vector2(1936, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/Boundaries/WallRight"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="WallBottom" type="StaticBody2D" parent="Floor/Boundaries"]
+collision_layer = 1
+collision_mask = 0
+position = Vector2(1104, 1096)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/Boundaries/WallBottom"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(700, 540)
