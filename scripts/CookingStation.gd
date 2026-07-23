@@ -14,6 +14,7 @@ const COLOR_BAR_SPOIL_WARNING := Color(0.9, 0.15, 0.15)
 const BAR_WIDTH := 80.0
 
 var state: State = State.EMPTY
+var cooking_item_type: Ingredient.Type = Ingredient.Type.TRIANGLE
 
 @onready var body: Polygon2D = $Body
 @onready var cook_timer: Timer = $CookTimer
@@ -54,19 +55,22 @@ func _update_timer_display(time_left: float, total_time: float) -> void:
 	time_label.text = "%.2f" % time_left
 
 
-func interact() -> void:
+func interact(player: Node) -> void:
 	match state:
 		State.EMPTY:
-			_set_state(State.COOKING)
-			cook_timer.start()
+			if player.is_holding and not player.held_item_cooked:
+				cooking_item_type = player.held_item_type
+				player.clear_held_item()
+				_set_state(State.COOKING)
+				cook_timer.start()
 		State.COOKING:
 			pass  # uninterruptible
 		State.READY:
-			print("[CookingStation] picked up")
-			spoil_timer.stop()
-			_set_state(State.EMPTY)
+			if not player.is_holding:
+				player.set_held_item(cooking_item_type, true)
+				spoil_timer.stop()
+				_set_state(State.EMPTY)
 		State.SPOILED:
-			print("[CookingStation] discarded spoiled item")
 			_set_state(State.EMPTY)
 
 
