@@ -72,6 +72,7 @@ func interact(player: Node) -> void:
 				if current_ingredients == max_ingredients:
 					if cook_station_type == Station.STORAGE:
 						_set_state(State.READY)
+						_update_item_visual(Ingredient.sprite_texture(cooking_item_type))
 					elif cook_station_type == Station.CAULDRON:
 						if Ingredient.Type.GRIND_YELLOW in ingredients_used and Ingredient.Type.COOK_ORANGE in ingredients_used:
 							cooking_item_type = Ingredient.Type.SUN_TEA
@@ -121,8 +122,15 @@ func interact(player: Node) -> void:
 				player.set_held_item(final_item, true)
 				cue_timer.stop()
 				cue_visual.visible = false
+				_update_item_visual(null)
 				_set_state(State.EMPTY)
 				_show_feedback(feedback)
+
+
+func _update_item_visual(texture: Texture2D) -> void:
+	var item_visual: Sprite2D = get_node_or_null("Item")
+	if item_visual:
+		item_visual.texture = texture
 
 
 func _is_cauldron_drink(type: Ingredient.Type) -> bool:

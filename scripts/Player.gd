@@ -64,31 +64,4 @@ func clear_held_item() -> void:
 func _update_held_item_visual() -> void:
 	held_item_visual.visible = is_holding
 	if is_holding:
-		if held_item_type == Ingredient.Type.YELLOW:
-			held_item_visual.texture = load("res://sprites/yellow.png")
-		elif held_item_type == Ingredient.Type.ORANGE:
-			held_item_visual.texture = load("res://sprites/orange.png")
-		elif held_item_type == Ingredient.Type.BLUE:
-			held_item_visual.texture = load("res://sprites/blue.png")
-		elif held_item_type == Ingredient.Type.COOK_YELLOW:
-			held_item_visual.texture = load("res://sprites/cook_yellow.png")
-		elif held_item_type == Ingredient.Type.COOK_ORANGE:
-			held_item_visual.texture = load("res://sprites/cook_orange.png")
-		elif held_item_type == Ingredient.Type.COOK_BLUE:
-			held_item_visual.texture = load("res://sprites/cook_blue.png")
-		elif held_item_type == Ingredient.Type.GRIND_YELLOW:
-			held_item_visual.texture = load("res://sprites/grind_yellow.png")
-		elif held_item_type == Ingredient.Type.GRIND_ORANGE:
-			held_item_visual.texture = load("res://sprites/grind_orange.png")
-		elif held_item_type == Ingredient.Type.GRIND_BLUE:
-			held_item_visual.texture = load("res://sprites/grind_blue.png")
-		elif held_item_type == Ingredient.Type.SUN_TEA:
-			held_item_visual.texture = load("res://sprites/sun_tea.png")
-		elif held_item_type == Ingredient.Type.MINT_SODA:
-			held_item_visual.texture = load("res://sprites/mint_soda.png")
-		elif held_item_type == Ingredient.Type.EARTH_BREW:
-			held_item_visual.texture = load("res://sprites/earth_brew.png")
-		elif held_item_type == Ingredient.Type.SUS_CONCOC:
-			held_item_visual.texture = load("res://sprites/sus_concoc.png")
-		else:
-			held_item_visual.texture = load("res://sprites/trash.png")
+		held_item_visual.texture = Ingredient.sprite_texture(held_item_type)

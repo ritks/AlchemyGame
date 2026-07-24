@@ -7,32 +7,23 @@ enum Type { YELLOW, ORANGE, BLUE,
 			SUN_TEA, MINT_SODA, EARTH_BREW, SUS_CONCOC,
 			TRASH}
 
-const COLORS := {
-	Type.YELLOW: Color(1, 1, 0),
-	Type.ORANGE: Color(1, 0.54901963, 0, 1),
-	Type.BLUE: Color(0.5294118, 0.80784315, 0.92156863, 1),
+const SPRITE_PATHS := {
+	Type.YELLOW: "res://sprites/yellow.png",
+	Type.ORANGE: "res://sprites/orange.png",
+	Type.BLUE: "res://sprites/blue.png",
+	Type.GRIND_YELLOW: "res://sprites/grind_yellow.png",
+	Type.GRIND_ORANGE: "res://sprites/grind_orange.png",
+	Type.GRIND_BLUE: "res://sprites/grind_blue.png",
+	Type.COOK_YELLOW: "res://sprites/cook_yellow.png",
+	Type.COOK_ORANGE: "res://sprites/cook_orange.png",
+	Type.COOK_BLUE: "res://sprites/cook_blue.png",
+	Type.SUN_TEA: "res://sprites/sun_tea.png",
+	Type.MINT_SODA: "res://sprites/mint_soda.png",
+	Type.EARTH_BREW: "res://sprites/earth_brew.png",
+	Type.SUS_CONCOC: "res://sprites/sus_concoc.png",
+	Type.TRASH: "res://sprites/trash.png",
 }
 
-const SIDES := {
-	Type.YELLOW: 3,
-	Type.ORANGE: 4,
-	Type.BLUE: 5,
-}
 
-const ANGLE_OFFSET := {
-	Type.YELLOW: 0.0,
-	Type.ORANGE: PI / 4.0,
-	Type.BLUE: 0.0,
-}
-
-
-static func polygon_points(type: Type, radius: float) -> PackedVector2Array:
-	return _regular_polygon(radius, 3, 0.0)
-
-
-static func _regular_polygon(radius: float, sides: int, angle_offset: float) -> PackedVector2Array:
-	var pts := PackedVector2Array()
-	for i in sides:
-		var angle: float = TAU * i / sides - PI / 2.0 + angle_offset
-		pts.append(Vector2(cos(angle), sin(angle)) * radius)
-	return pts
+static func sprite_texture(type: Type) -> Texture2D:
+	return load(SPRITE_PATHS[type])
