@@ -74,8 +74,9 @@ radius = 12.953307
 [node name="Kitchen" type="Node2D" unique_id=1130438476]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1592426072]
-position = Vector2(965, 535)
+position = Vector2(960, 536)
 texture = ExtResource("1_6022o")
+offset = Vector2(0, 4)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1092640874]
 position = Vector2(960, 540)
@@ -272,8 +273,9 @@ position = Vector2(1083, 155)
 position = Vector2(1340, 155)
 
 [node name="Recipes" type="Sprite2D" parent="." unique_id=1269332930]
-position = Vector2(480, 785)
+position = Vector2(84, 42)
 texture = ExtResource("6_qnge3")
+offset = Vector2(396, 743)
 script = ExtResource("7_recipecard")
 
 [editable path="Floor/Cauldron"]
