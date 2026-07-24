@@ -5,7 +5,6 @@ const SLIDE_DURATION := 0.3
 
 var rest_position: Vector2
 var hidden_position: Vector2
-var is_showing: bool = false
 var slide_tween: Tween
 
 
@@ -19,8 +18,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_recipe"):
-		is_showing = not is_showing
-		_animate_to(rest_position if is_showing else hidden_position)
+		_animate_to(rest_position)
+	elif event.is_action_released("toggle_recipe"):
+		_animate_to(hidden_position)
 
 
 func _animate_to(target: Vector2) -> void:
