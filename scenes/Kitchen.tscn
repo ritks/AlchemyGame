@@ -273,9 +273,9 @@ position = Vector2(1083, 155)
 position = Vector2(1340, 155)
 
 [node name="Recipes" type="Sprite2D" parent="." unique_id=1269332930]
-position = Vector2(84, 42)
+position = Vector2(102, 84)
 texture = ExtResource("6_qnge3")
-offset = Vector2(396, 743)
+offset = Vector2(378, 701)
 script = ExtResource("7_recipecard")
 
 [editable path="Floor/Cauldron"]
