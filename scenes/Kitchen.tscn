@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://brytf4vrdb1mp" path="res://scenes/CookingStation.tscn" id="2_station"]
 [ext_resource type="PackedScene" uid="uid://cbe3w5ohg047c" path="res://scenes/IngredientSlot.tscn" id="3_slot"]
 [ext_resource type="PackedScene" uid="uid://b72wyqdkujstb" path="res://scenes/Customer.tscn" id="5_cwfnw"]
+[ext_resource type="Texture2D" uid="uid://drpqm7vobhk8r" path="res://sprites/recipes.png" id="6_qnge3"]
+[ext_resource type="Script" path="res://scripts/RecipeCard.gd" id="7_recipecard"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4uee"]
 size = Vector2(1677, 109.5)
@@ -174,7 +176,7 @@ shape = SubResource("RectangleShape2D_qnge3")
 position = Vector2(0, 0.00035095215)
 shape = SubResource("CircleShape2D_cwfnw")
 
-[node name="Item" type="Sprite2D" parent="Floor/Storage1"]
+[node name="Item" type="Sprite2D" parent="Floor/Storage1" unique_id=1197433601]
 
 [node name="Storage2" parent="Floor" unique_id=940504384 instance=ExtResource("2_station")]
 position = Vector2(1270.9999, 1057.9999)
@@ -188,7 +190,7 @@ shape = SubResource("RectangleShape2D_qnge3")
 position = Vector2(0, 0.00035095215)
 shape = SubResource("CircleShape2D_cwfnw")
 
-[node name="Item" type="Sprite2D" parent="Floor/Storage2"]
+[node name="Item" type="Sprite2D" parent="Floor/Storage2" unique_id=984827906]
 
 [node name="Storage3" parent="Floor" unique_id=1132444593 instance=ExtResource("2_station")]
 position = Vector2(1402.9999, 1057.9999)
@@ -222,6 +224,11 @@ position = Vector2(1083, 155)
 
 [node name="Customer5" parent="." unique_id=1510208693 instance=ExtResource("5_cwfnw")]
 position = Vector2(1340, 155)
+
+[node name="Recipes" type="Sprite2D" parent="." unique_id=1269332930]
+position = Vector2(480, 785)
+texture = ExtResource("6_qnge3")
+script = ExtResource("7_recipecard")
 
 [editable path="Floor/Cauldron"]
 [editable path="Floor/Pan1"]

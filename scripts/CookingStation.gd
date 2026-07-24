@@ -61,9 +61,14 @@ func _ready() -> void:
 
 	# cue_visual.texture = load("res://sprites/cue.png")
 
-	ready_icon.texture = load("res://sprites/ready_icon.png")
-	ready_icon.position = READY_ICON_OFFSET[cook_station_type]
-	ready_icon.flip_h = cook_station_type == Station.PAN or cook_station_type == Station.CAULDRON
+	# Trash Can and Storage don't get ready-icon previews/reveals at all, so skip
+	# _process() entirely for them rather than early-returning out of it every frame.
+	if cook_station_type == Station.TRASH_CAN or cook_station_type == Station.STORAGE:
+		set_process(false)
+	else:
+		ready_icon.texture = load("res://sprites/ready_icon.png")
+		ready_icon.position = READY_ICON_OFFSET[cook_station_type]
+		ready_icon.flip_h = cook_station_type == Station.PAN or cook_station_type == Station.CAULDRON
 
 	cook_timer.one_shot = true
 	cook_timer.wait_time = cook_time_sec
@@ -259,5 +264,5 @@ func _set_state(new_state: State) -> void:
 			_hide_ready_icon()
 		State.READY:
 			body.modulate = Color.WHITE
-			if cook_station_type != Station.CAULDRON:
+			if cook_station_type == Station.MORTAR or cook_station_type == Station.PAN:
 				_show_ready_icon(cooking_item_type)
