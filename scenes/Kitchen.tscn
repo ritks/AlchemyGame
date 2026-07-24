@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b72wyqdkujstb" path="res://scenes/Customer.tscn" id="5_cwfnw"]
 [ext_resource type="Texture2D" uid="uid://drpqm7vobhk8r" path="res://sprites/recipes.png" id="6_qnge3"]
 [ext_resource type="Script" uid="uid://dklbmaoes72fd" path="res://scripts/RecipeCard.gd" id="7_recipecard"]
+[ext_resource type="Script" uid="uid://dqnbr6kku2t7s" path="res://scripts/Kitchen.gd" id="8_kitchen"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4uee"]
 size = Vector2(1677, 109.5)
@@ -72,6 +73,7 @@ size = Vector2(36.297546, 18.304535)
 radius = 12.953307
 
 [node name="Kitchen" type="Node2D" unique_id=1130438476]
+script = ExtResource("8_kitchen")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1592426072]
 position = Vector2(960, 536)
@@ -271,6 +273,22 @@ position = Vector2(1083, 155)
 
 [node name="Customer5" parent="." unique_id=1510208693 instance=ExtResource("5_cwfnw")]
 position = Vector2(1340, 155)
+
+[node name="Label" type="Label" parent="." unique_id=321867930]
+offset_left = 360.0
+offset_top = 990.0
+offset_right = 666.0
+offset_bottom = 1064.0
+theme_override_font_sizes/font_size = 54
+text = ". for recipes"
+
+[node name="Label2" type="Label" parent="." unique_id=1988790231]
+offset_left = 1062.0
+offset_top = 1020.0
+offset_right = 1466.0
+offset_bottom = 1094.0
+theme_override_font_sizes/font_size = 54
+text = "3 storage space"
 
 [node name="Recipes" type="Sprite2D" parent="." unique_id=1269332930]
 position = Vector2(102, 84)

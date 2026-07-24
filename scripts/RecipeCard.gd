@@ -9,7 +9,7 @@ var slide_tween: Tween
 
 
 func _ready() -> void:
-	rest_position = position
+	rest_position = position + Vector2(0, 30)
 	var half_height: float = (texture.get_size().y * scale.y) / 2.0
 	var viewport_height: float = get_viewport_rect().size.y
 	hidden_position = Vector2(rest_position.x, viewport_height - PEEK_AMOUNT + half_height)

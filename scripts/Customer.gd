@@ -1,5 +1,7 @@
 extends Node2D
 
+signal order_fulfilled
+
 @onready var customer_sprite: Sprite2D = $Sprite
 @onready var drink: Sprite2D = $Textbubble/Drink
 @onready var drink_type: int = randi_range(9, 12)
@@ -21,4 +23,5 @@ func _ready() -> void:
 func interact(player: Node) -> void:
 	if player.is_holding and player.held_item_type == drink_type:
 		player.clear_held_item()
+		order_fulfilled.emit()
 		self.queue_free()

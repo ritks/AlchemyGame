@@ -17,9 +17,9 @@ const CUE_DELAY_MAX := 5.0
 const WINDOW_HALF_WIDTH := 1
 const DRINK_TARGET_SEC := {
 	Ingredient.Type.SUN_TEA: 5.0,
-	Ingredient.Type.MINT_SODA: 6.0,
-	Ingredient.Type.EARTH_BREW: 7.0,
-	Ingredient.Type.SUS_CONCOC: 8.0,
+	Ingredient.Type.MINT_SODA: 5.0,
+	Ingredient.Type.EARTH_BREW: 5.0,
+	Ingredient.Type.SUS_CONCOC: 5.0,
 }
 const READY_ICON_OFFSET := {
 	Station.MORTAR: Vector2(-80, 0),
