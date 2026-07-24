@@ -30,8 +30,6 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="CookTimer" type="Timer" parent="." unique_id=1372812489]
 
-[node name="PerfectWindowTimer" type="Timer" parent="." unique_id=1469575589]
-
 [node name="CueTimer" type="Timer" parent="." unique_id=336163676]
 
 [node name="CueVisual" type="Sprite2D" parent="." unique_id=1935022190]
