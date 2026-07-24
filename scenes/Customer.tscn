@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b72wyqdkujstb"]
 
 [ext_resource type="Script" uid="uid://croe207iuxd74" path="res://scripts/Customer.gd" id="1_xvjni"]
+[ext_resource type="Texture2D" uid="uid://mcp8v0qjhptl" path="res://sprites/text_bubble.png" id="2_bov33"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bonrk"]
 radius = 53.334118
@@ -13,6 +14,7 @@ script = ExtResource("1_xvjni")
 [node name="Textbubble" type="Node2D" parent="." unique_id=846460195]
 
 [node name="Sprite" type="Sprite2D" parent="Textbubble" unique_id=1164970831]
+texture = ExtResource("2_bov33")
 
 [node name="Drink" type="Sprite2D" parent="Textbubble" unique_id=1313583334]
 
