@@ -15,11 +15,20 @@ size = Vector2(199.25, 362)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_counter"]
 size = Vector2(178, 635.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwfnw"]
+size = Vector2(1907, 50)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
 radius = 53.334118
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnge3"]
+size = Vector2(36.297546, 18.304535)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwfnw"]
+radius = 12.953307
 
 [node name="Kitchen" type="Node2D" unique_id=1130438476]
 
@@ -59,11 +68,19 @@ position = Vector2(-153, -7)
 shape = SubResource("RectangleShape2D_counter")
 metadata/_edit_group_ = true
 
+[node name="CounterSpaceBottom" type="StaticBody2D" parent="Boundaries" unique_id=61202261]
+position = Vector2(1101, 1108)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/CounterSpaceBottom" unique_id=1174661166]
+position = Vector2(-133, -4)
+shape = SubResource("RectangleShape2D_cwfnw")
+metadata/_edit_group_ = true
+
 [node name="Floor" type="Node2D" parent="." unique_id=498590353]
 
 [node name="Cauldron" parent="Floor" unique_id=919196699 instance=ExtResource("2_station")]
 position = Vector2(935.9999, 581)
-scale = Vector2(1, 1)
 max_ingredients = 2
 
 [node name="CollisionShape2D" parent="Floor/Cauldron" index="0" unique_id=1305692116]
@@ -75,7 +92,6 @@ scale = Vector2(3.3467245, 2.115014)
 
 [node name="Pan1" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
 position = Vector2(126.000015, 430.00006)
-scale = Vector2(1, 1)
 cook_station_type = 2
 
 [node name="CollisionShape2D" parent="Floor/Pan1" index="0" unique_id=1305692116]
@@ -88,7 +104,6 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Pan2" parent="Floor" unique_id=1899951254 instance=ExtResource("2_station")]
 position = Vector2(113.99999, 619)
-scale = Vector2(1, 1)
 cook_station_type = 2
 
 [node name="CollisionShape2D" parent="Floor/Pan2" index="0" unique_id=1305692116]
@@ -101,7 +116,6 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Mortar1" parent="Floor" unique_id=609255009 instance=ExtResource("2_station")]
 position = Vector2(1777.0002, 234.99994)
-scale = Vector2(1, 1)
 cook_station_type = 1
 
 [node name="CollisionShape2D" parent="Floor/Mortar1" index="0" unique_id=1305692116]
@@ -114,7 +128,6 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="Mortar2" parent="Floor" unique_id=236315879 instance=ExtResource("2_station")]
 position = Vector2(1787.9999, 406)
-scale = Vector2(1, 1)
 cook_station_type = 1
 
 [node name="CollisionShape2D" parent="Floor/Mortar2" index="0" unique_id=1305692116]
@@ -135,6 +148,55 @@ ingredient_type = 1
 [node name="IngredientSlot3" parent="Floor" unique_id=1831037678 instance=ExtResource("3_slot")]
 position = Vector2(1705, 978)
 ingredient_type = 2
+
+[node name="Trash" parent="Floor" unique_id=1471996645 instance=ExtResource("2_station")]
+position = Vector2(913.0001, 1057.0001)
+max_ingredients = 9999
+cook_station_type = 3
+
+[node name="CollisionShape2D" parent="Floor/Trash" index="0" unique_id=1305692116]
+scale = Vector2(1.7000002, 1.7000002)
+shape = SubResource("RectangleShape2D_qnge3")
+
+[node name="CollisionShape2D" parent="Floor/Trash/InteractArea" parent_id_path=PackedInt32Array(1471996645, 1775379100) index="0" unique_id=66873291]
+position = Vector2(0, 0.00035095215)
+shape = SubResource("CircleShape2D_cwfnw")
+
+[node name="Storage1" parent="Floor" unique_id=1124554499 instance=ExtResource("2_station")]
+position = Vector2(1137.9999, 1058.9999)
+cook_station_type = 4
+
+[node name="CollisionShape2D" parent="Floor/Storage1" index="0" unique_id=1305692116]
+scale = Vector2(1.7000002, 1.7000002)
+shape = SubResource("RectangleShape2D_qnge3")
+
+[node name="CollisionShape2D" parent="Floor/Storage1/InteractArea" parent_id_path=PackedInt32Array(1124554499, 1775379100) index="0" unique_id=66873291]
+position = Vector2(0, 0.00035095215)
+shape = SubResource("CircleShape2D_cwfnw")
+
+[node name="Storage2" parent="Floor" unique_id=940504384 instance=ExtResource("2_station")]
+position = Vector2(1270.9999, 1057.9999)
+cook_station_type = 4
+
+[node name="CollisionShape2D" parent="Floor/Storage2" index="0" unique_id=1305692116]
+scale = Vector2(1.7000002, 1.7000002)
+shape = SubResource("RectangleShape2D_qnge3")
+
+[node name="CollisionShape2D" parent="Floor/Storage2/InteractArea" parent_id_path=PackedInt32Array(940504384, 1775379100) index="0" unique_id=66873291]
+position = Vector2(0, 0.00035095215)
+shape = SubResource("CircleShape2D_cwfnw")
+
+[node name="Storage3" parent="Floor" unique_id=1132444593 instance=ExtResource("2_station")]
+position = Vector2(1402.9999, 1057.9999)
+cook_station_type = 4
+
+[node name="CollisionShape2D" parent="Floor/Storage3" index="0" unique_id=1305692116]
+scale = Vector2(1.7000002, 1.7000002)
+shape = SubResource("RectangleShape2D_qnge3")
+
+[node name="CollisionShape2D" parent="Floor/Storage3/InteractArea" parent_id_path=PackedInt32Array(1132444593, 1775379100) index="0" unique_id=66873291]
+position = Vector2(0, 0.00035095215)
+shape = SubResource("CircleShape2D_cwfnw")
 
 [node name="Player" parent="." unique_id=1715885497 instance=ExtResource("1_player")]
 position = Vector2(700, 540)
@@ -160,3 +222,7 @@ position = Vector2(1340, 155)
 [editable path="Floor/Pan2"]
 [editable path="Floor/Mortar1"]
 [editable path="Floor/Mortar2"]
+[editable path="Floor/Trash"]
+[editable path="Floor/Storage1"]
+[editable path="Floor/Storage2"]
+[editable path="Floor/Storage3"]

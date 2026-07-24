@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-enum State { EMPTY, COOKING, READY }
-enum Station { CAULDRON, MORTAR, PAN }
+enum State { EMPTY, COOKING, READY}
+enum Station { CAULDRON, MORTAR, PAN, TRASH_CAN, STORAGE }
 
 @export var cook_time_sec: float = 8.0
 @export var max_ingredients: int = 1
@@ -31,6 +31,10 @@ var showing_feedback: bool = false
 
 
 func _ready() -> void:
+	if cook_station_type == Station.TRASH_CAN:
+		body.texture = load("res://sprites/trash_can.png")
+	if cook_station_type == Station.STORAGE:
+		body.texture = load("res://sprites/storage.png")
 	if cook_station_type == Station.CAULDRON:
 		body.texture = load("res://sprites/cauldron.png")
 	if cook_station_type == Station.PAN:
@@ -63,7 +67,10 @@ func interact(player: Node) -> void:
 				if current_ingredients == max_ingredients:
 					_set_state(State.COOKING)
 					cook_timer.start()
-					if cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.YELLOW:
+					if cook_station_type == Station.STORAGE:
+						_set_state(State.READY)
+						cook_timer.stop()
+					elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.YELLOW:
 						cooking_item_type = Ingredient.Type.COOK_YELLOW
 					elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.ORANGE:
 						cooking_item_type = Ingredient.Type.COOK_ORANGE

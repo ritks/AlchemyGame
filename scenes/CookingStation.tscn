@@ -9,7 +9,6 @@ radius = 40.0
 radius = 53.334118
 
 [node name="CookingStation" type="StaticBody2D" unique_id=1430987799]
-scale = Vector2(1.7, 1.7)
 collision_mask = 0
 script = ExtResource("1_station")
 
@@ -31,13 +30,13 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="CookTimer" type="Timer" parent="." unique_id=1372812489]
 
-[node name="PerfectWindowTimer" type="Timer" parent="."]
+[node name="PerfectWindowTimer" type="Timer" parent="." unique_id=1469575589]
 
-[node name="CueTimer" type="Timer" parent="."]
+[node name="CueTimer" type="Timer" parent="." unique_id=336163676]
 
-[node name="CueVisual" type="Sprite2D" parent="."]
-position = Vector2(0, -100)
+[node name="CueVisual" type="Sprite2D" parent="." unique_id=1935022190]
 visible = false
+position = Vector2(0, -100)
 
 [node name="FeedbackTimer" type="Timer" parent="." unique_id=332214456]
 
