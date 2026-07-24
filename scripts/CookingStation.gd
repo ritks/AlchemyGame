@@ -21,19 +21,30 @@ const DRINK_TARGET_SEC := {
 	Ingredient.Type.EARTH_BREW: 7.0,
 	Ingredient.Type.SUS_CONCOC: 8.0,
 }
+const READY_ICON_OFFSET := {
+	Station.MORTAR: Vector2(-80, 0),
+	Station.PAN: Vector2(80, 0),
+	Station.CAULDRON: Vector2(90, -90),
+	Station.STORAGE: Vector2(80, 0),
+	Station.TRASH_CAN: Vector2(80, 0),
+}
 
 var state: State = State.EMPTY
 var cooking_item_type: Ingredient.Type = Ingredient.Type.YELLOW
 var showing_feedback: bool = false
 var cue_started_at_msec: int = 0
+var nearby_player: Node = null
 
 @onready var body: Sprite2D = $Body
+@onready var interact_area: Area2D = $InteractArea
 @onready var cook_timer: Timer = $CookTimer
 @onready var cue_timer: Timer = $CueTimer
 @onready var cue_visual: Sprite2D = $CueVisual
 @onready var feedback_timer: Timer = $FeedbackTimer
 @onready var timer_display: Node2D = $TimerDisplay
 @onready var time_label: Label = $TimerDisplay/TimeLabel
+@onready var ready_icon: Sprite2D = $ReadyIcon
+@onready var ready_icon_item: Sprite2D = $ReadyIcon/ReadyIconItem
 
 
 func _ready() -> void:
@@ -50,6 +61,10 @@ func _ready() -> void:
 
 	# cue_visual.texture = load("res://sprites/cue.png")
 
+	ready_icon.texture = load("res://sprites/ready_icon.png")
+	ready_icon.position = READY_ICON_OFFSET[cook_station_type]
+	ready_icon.flip_h = cook_station_type == Station.PAN or cook_station_type == Station.CAULDRON
+
 	cook_timer.one_shot = true
 	cook_timer.wait_time = cook_time_sec
 	cue_timer.one_shot = true
@@ -57,7 +72,13 @@ func _ready() -> void:
 	cook_timer.timeout.connect(_on_cook_timeout)
 	cue_timer.timeout.connect(_on_cue_timeout)
 	feedback_timer.timeout.connect(_on_feedback_timeout)
+	interact_area.body_entered.connect(_on_interact_area_body_entered)
+	interact_area.body_exited.connect(_on_interact_area_body_exited)
 	_set_state(State.EMPTY)
+
+
+func _process(_delta: float) -> void:
+	_update_ready_icon_preview()
 
 
 func interact(player: Node) -> void:
@@ -71,39 +92,18 @@ func interact(player: Node) -> void:
 				print(ingredients_used)
 				if current_ingredients == max_ingredients:
 					if cook_station_type == Station.STORAGE:
+						cooking_item_type = _predict_single_result(cooking_item_type)
 						_set_state(State.READY)
 						_update_item_visual(Ingredient.sprite_texture(cooking_item_type))
 					elif cook_station_type == Station.CAULDRON:
-						if Ingredient.Type.GRIND_YELLOW in ingredients_used and Ingredient.Type.COOK_ORANGE in ingredients_used:
-							cooking_item_type = Ingredient.Type.SUN_TEA
-						elif Ingredient.Type.GRIND_BLUE in ingredients_used and Ingredient.Type.COOK_BLUE in ingredients_used:
-							cooking_item_type = Ingredient.Type.MINT_SODA
-						elif Ingredient.Type.GRIND_ORANGE in ingredients_used and Ingredient.Type.GRIND_ORANGE in ingredients_used:
-							cooking_item_type = Ingredient.Type.EARTH_BREW
-						elif Ingredient.Type.EARTH_BREW in ingredients_used and Ingredient.Type.COOK_BLUE in ingredients_used:
-							cooking_item_type = Ingredient.Type.SUS_CONCOC
-						else:
-							cooking_item_type = Ingredient.Type.TRASH
+						cooking_item_type = _predict_cauldron_result(ingredients_used)
 						print(cooking_item_type)
 						_set_state(State.COOKING)
 						# Flat lockout before the cue timer even starts counting down, so the
 						# player can never grab a cauldron drink immediately after placing it.
 						cook_timer.start(CAULDRON_LOCKOUT_SEC)
 					else:
-						if cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.YELLOW:
-							cooking_item_type = Ingredient.Type.COOK_YELLOW
-						elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.ORANGE:
-							cooking_item_type = Ingredient.Type.COOK_ORANGE
-						elif cook_station_type == Station.PAN and cooking_item_type == Ingredient.Type.BLUE:
-							cooking_item_type = Ingredient.Type.COOK_BLUE
-						elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.YELLOW:
-							cooking_item_type = Ingredient.Type.GRIND_YELLOW
-						elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.ORANGE:
-							cooking_item_type = Ingredient.Type.GRIND_ORANGE
-						elif cook_station_type == Station.MORTAR and cooking_item_type == Ingredient.Type.BLUE:
-							cooking_item_type = Ingredient.Type.GRIND_BLUE
-						else:
-							cooking_item_type = Ingredient.Type.TRASH
+						cooking_item_type = _predict_single_result(cooking_item_type)
 						print(cooking_item_type)
 						_set_state(State.COOKING)
 						cook_timer.start()
@@ -125,6 +125,75 @@ func interact(player: Node) -> void:
 				_update_item_visual(null)
 				_set_state(State.EMPTY)
 				_show_feedback(feedback)
+
+
+func _on_interact_area_body_entered(body_node: Node) -> void:
+	nearby_player = body_node
+
+
+func _on_interact_area_body_exited(body_node: Node) -> void:
+	if body_node == nearby_player:
+		nearby_player = null
+
+
+func _predict_single_result(input_type: Ingredient.Type) -> Ingredient.Type:
+	if cook_station_type == Station.STORAGE:
+		return input_type
+	elif cook_station_type == Station.PAN:
+		if input_type == Ingredient.Type.YELLOW:
+			return Ingredient.Type.COOK_YELLOW
+		elif input_type == Ingredient.Type.ORANGE:
+			return Ingredient.Type.COOK_ORANGE
+		elif input_type == Ingredient.Type.BLUE:
+			return Ingredient.Type.COOK_BLUE
+	elif cook_station_type == Station.MORTAR:
+		if input_type == Ingredient.Type.YELLOW:
+			return Ingredient.Type.GRIND_YELLOW
+		elif input_type == Ingredient.Type.ORANGE:
+			return Ingredient.Type.GRIND_ORANGE
+		elif input_type == Ingredient.Type.BLUE:
+			return Ingredient.Type.GRIND_BLUE
+	return Ingredient.Type.TRASH
+
+
+func _predict_cauldron_result(ingredients: Array[Ingredient.Type]) -> Ingredient.Type:
+	if Ingredient.Type.GRIND_YELLOW in ingredients and Ingredient.Type.COOK_ORANGE in ingredients:
+		return Ingredient.Type.SUN_TEA
+	elif Ingredient.Type.GRIND_BLUE in ingredients and Ingredient.Type.COOK_BLUE in ingredients:
+		return Ingredient.Type.MINT_SODA
+	elif Ingredient.Type.GRIND_ORANGE in ingredients and Ingredient.Type.GRIND_ORANGE in ingredients:
+		return Ingredient.Type.EARTH_BREW
+	elif Ingredient.Type.EARTH_BREW in ingredients and Ingredient.Type.COOK_BLUE in ingredients:
+		return Ingredient.Type.SUS_CONCOC
+	return Ingredient.Type.TRASH
+
+
+func _update_ready_icon_preview() -> void:
+	if state != State.EMPTY:
+		return
+	if cook_station_type == Station.CAULDRON:
+		if current_ingredients == 1 and nearby_player and nearby_player.is_holding:
+			var hypothetical: Array[Ingredient.Type] = ingredients_used.duplicate()
+			hypothetical.append(nearby_player.held_item_type)
+			var predicted: Ingredient.Type = _predict_cauldron_result(hypothetical)
+			_show_ready_icon(predicted)
+		else:
+			_hide_ready_icon()
+	else:
+		if current_ingredients < max_ingredients and nearby_player and nearby_player.is_holding:
+			var predicted: Ingredient.Type = _predict_single_result(nearby_player.held_item_type)
+			_show_ready_icon(predicted)
+		else:
+			_hide_ready_icon()
+
+
+func _show_ready_icon(result: Ingredient.Type) -> void:
+	ready_icon.visible = true
+	ready_icon_item.texture = Ingredient.sprite_texture(result)
+
+
+func _hide_ready_icon() -> void:
+	ready_icon.visible = false
 
 
 func _update_item_visual(texture: Texture2D) -> void:
@@ -182,6 +251,13 @@ func _set_state(new_state: State) -> void:
 		timer_display.visible = false
 	state = new_state
 	match state:
-		State.EMPTY: body.modulate = Color.WHITE
-		State.COOKING: body.modulate = Color.WHITE
-		State.READY: body.modulate = Color.WHITE
+		State.EMPTY:
+			body.modulate = Color.WHITE
+			_hide_ready_icon()
+		State.COOKING:
+			body.modulate = Color.WHITE
+			_hide_ready_icon()
+		State.READY:
+			body.modulate = Color.WHITE
+			if cook_station_type != Station.CAULDRON:
+				_show_ready_icon(cooking_item_type)

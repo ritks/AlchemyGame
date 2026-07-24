@@ -21,7 +21,7 @@ shape = SubResource("CircleShape2D_body")
 [node name="InteractArea" type="Area2D" parent="." unique_id=1775379100]
 scale = Vector2(1.7, 1.7)
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=66873291]
 position = Vector2(0, 22)
@@ -50,3 +50,8 @@ offset_bottom = -3.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0.00"
 horizontal_alignment = 1
+
+[node name="ReadyIcon" type="Sprite2D" parent="."]
+visible = false
+
+[node name="ReadyIconItem" type="Sprite2D" parent="ReadyIcon"]
