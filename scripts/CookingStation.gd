@@ -39,7 +39,6 @@ var nearby_player: Node = null
 @onready var interact_area: Area2D = $InteractArea
 @onready var cook_timer: Timer = $CookTimer
 @onready var cue_timer: Timer = $CueTimer
-@onready var cue_visual: Sprite2D = $CueVisual
 @onready var feedback_timer: Timer = $FeedbackTimer
 @onready var timer_display: Node2D = $TimerDisplay
 @onready var time_label: Label = $TimerDisplay/TimeLabel
@@ -52,14 +51,12 @@ func _ready() -> void:
 		body.texture = load("res://sprites/trash_can.png")
 	elif cook_station_type == Station.STORAGE:
 		body.texture = load("res://sprites/storage.png")
-	elif cook_station_type == Station.CAULDRON:
-		body.texture = load("res://sprites/cauldron.png")
 	elif cook_station_type == Station.PAN:
 		body.texture = load("res://sprites/pan.png")
 	elif cook_station_type == Station.MORTAR:
 		body.texture = load("res://sprites/mortar.png")
-
-	# cue_visual.texture = load("res://sprites/cue.png")
+	# Cauldron's Body texture (a 2-frame spritesheet) and its cue AnimationPlayer
+	# are configured per-instance in Kitchen.tscn, not loaded here.
 
 	# Trash Can and Storage don't get ready-icon previews/reveals at all, so skip
 	# _process() entirely for them rather than early-returning out of it every frame.
@@ -126,7 +123,6 @@ func interact(player: Node) -> void:
 					feedback = result["feedback"]
 				player.set_held_item(final_item, true)
 				cue_timer.stop()
-				cue_visual.visible = false
 				_update_item_visual(null)
 				_set_state(State.EMPTY)
 				_show_feedback(feedback)
@@ -244,7 +240,9 @@ func _on_cook_timeout() -> void:
 
 
 func _on_cue_timeout() -> void:
-	cue_visual.visible = true
+	var anim_player: AnimationPlayer = get_node_or_null("AnimationPlayer")
+	if anim_player:
+		anim_player.play("cue")
 	cue_started_at_msec = Time.get_ticks_msec()
 	_set_state(State.READY)
 

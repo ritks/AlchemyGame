@@ -3,10 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://b1vpi8df6jix5" path="res://sprites/kitchen.png" id="1_6022o"]
 [ext_resource type="PackedScene" uid="uid://c4xdi3y57hj5q" path="res://scenes/Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" uid="uid://brytf4vrdb1mp" path="res://scenes/CookingStation.tscn" id="2_station"]
+[ext_resource type="Texture2D" uid="uid://b5tah58gr1fmy" path="res://sprites/cauldron_sheet.png" id="3_jmce5"]
 [ext_resource type="PackedScene" uid="uid://cbe3w5ohg047c" path="res://scenes/IngredientSlot.tscn" id="3_slot"]
 [ext_resource type="PackedScene" uid="uid://b72wyqdkujstb" path="res://scenes/Customer.tscn" id="5_cwfnw"]
 [ext_resource type="Texture2D" uid="uid://drpqm7vobhk8r" path="res://sprites/recipes.png" id="6_qnge3"]
-[ext_resource type="Script" path="res://scripts/RecipeCard.gd" id="7_recipecard"]
+[ext_resource type="Script" uid="uid://dklbmaoes72fd" path="res://scripts/RecipeCard.gd" id="7_recipecard"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4uee"]
 size = Vector2(1677, 109.5)
@@ -19,6 +20,44 @@ size = Vector2(178, 635.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwfnw"]
 size = Vector2(1907, 50)
+
+[sub_resource type="Animation" id="Animation_ud40p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_20l34"]
+resource_name = "cue"
+length = 0.3750125
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4fgkg"]
+_data = {
+&"RESET": SubResource("Animation_ud40p"),
+&"cue": SubResource("Animation_20l34")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 40.0
@@ -88,9 +127,16 @@ max_ingredients = 2
 [node name="CollisionShape2D" parent="Floor/Cauldron" index="0" unique_id=1305692116]
 scale = Vector2(2.8, 2.8)
 
+[node name="Body" parent="Floor/Cauldron" index="1" unique_id=1642447937]
+texture = ExtResource("3_jmce5")
+hframes = 2
+
 [node name="CollisionShape2D" parent="Floor/Cauldron/InteractArea" parent_id_path=PackedInt32Array(919196699, 1775379100) index="0" unique_id=66873291]
 position = Vector2(0, 26.117645)
 scale = Vector2(3.3467245, 2.115014)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Floor/Cauldron" unique_id=1093499759]
+libraries/ = SubResource("AnimationLibrary_4fgkg")
 
 [node name="Pan1" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
 position = Vector2(126.000015, 430.00006)

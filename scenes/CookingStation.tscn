@@ -32,10 +32,6 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="CueTimer" type="Timer" parent="." unique_id=336163676]
 
-[node name="CueVisual" type="Sprite2D" parent="." unique_id=1935022190]
-visible = false
-position = Vector2(0, -100)
-
 [node name="FeedbackTimer" type="Timer" parent="." unique_id=332214456]
 
 [node name="TimerDisplay" type="Node2D" parent="." unique_id=1564197161]
