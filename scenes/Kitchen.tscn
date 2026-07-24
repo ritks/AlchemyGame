@@ -63,7 +63,15 @@ metadata/_edit_group_ = true
 
 [node name="Cauldron" parent="Floor" unique_id=919196699 instance=ExtResource("2_station")]
 position = Vector2(935.9999, 581)
+scale = Vector2(1, 1)
 max_ingredients = 2
+
+[node name="CollisionShape2D" parent="Floor/Cauldron" index="0" unique_id=1305692116]
+scale = Vector2(2.8, 2.8)
+
+[node name="CollisionShape2D" parent="Floor/Cauldron/InteractArea" parent_id_path=PackedInt32Array(919196699, 1775379100) index="0" unique_id=66873291]
+position = Vector2(0, 26.117645)
+scale = Vector2(3.3467245, 2.115014)
 
 [node name="Pan1" parent="Floor" unique_id=1430987799 instance=ExtResource("2_station")]
 position = Vector2(126.000015, 430.00006)

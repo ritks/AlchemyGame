@@ -31,27 +31,19 @@ shape = SubResource("CircleShape2D_interact")
 
 [node name="CookTimer" type="Timer" parent="." unique_id=1372812489]
 
-[node name="SpoilTimer" type="Timer" parent="." unique_id=1560959580]
+[node name="PerfectWindowTimer" type="Timer" parent="."]
+
+[node name="CueTimer" type="Timer" parent="."]
+
+[node name="CueVisual" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+visible = false
 
 [node name="FeedbackTimer" type="Timer" parent="." unique_id=332214456]
 
 [node name="TimerDisplay" type="Node2D" parent="." unique_id=1564197161]
 visible = false
 position = Vector2(0, -70)
-
-[node name="BarBackground" type="ColorRect" parent="TimerDisplay" unique_id=49176899]
-offset_left = -40.0
-offset_top = -5.0
-offset_right = 40.0
-offset_bottom = 5.0
-color = Color(0.15, 0.15, 0.15, 1)
-
-[node name="BarFill" type="ColorRect" parent="TimerDisplay" unique_id=1770686275]
-offset_left = -40.0
-offset_top = -5.0
-offset_right = 40.0
-offset_bottom = 5.0
-color = Color(0.9, 0.6, 0.1, 1)
 
 [node name="TimeLabel" type="Label" parent="TimerDisplay" unique_id=1175280635]
 offset_left = -40.0
